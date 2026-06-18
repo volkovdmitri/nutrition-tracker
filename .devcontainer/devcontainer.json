@@ -1,0 +1,23 @@
+{
+  "name": "nutrition-tracker-backend",
+
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
+  },
+
+  "postCreateCommand": "cd backend && pip install uv && uv sync",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "charliermarsh.ruff",
+        "ms-python.python",
+        "ms-python.mypy-type-checker"
+      ]
+    }
+  },
+
+  "remoteUser": "vscode"
+}
