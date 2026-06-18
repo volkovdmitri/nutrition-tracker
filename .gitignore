@@ -3,3 +3,4 @@
 .ruff_cache
 .env
 .python-version
+__pycache__
