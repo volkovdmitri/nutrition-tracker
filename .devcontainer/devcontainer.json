@@ -7,7 +7,7 @@
     "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
 
-  "postCreateCommand": "cd backend && pip install uv && uv sync",
+  "postCreateCommand": "cd backend && curl -LsSf https://astral.sh/uv/install.sh | sh && ~/.cargo/bin/uv sync",
 
   "customizations": {
     "vscode": {
