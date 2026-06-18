@@ -2,5 +2,6 @@
 .mypy_cache
 .ruff_cache
 .env
+.pytest_cache
 .python-version
 __pycache__
