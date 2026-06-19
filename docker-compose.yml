@@ -19,7 +19,6 @@ services:
       DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/nutrition
     ports:
       - "8000:8000"
-    command: uv run python -m app.db.init_db
 
 volumes:
   postgres_data:
