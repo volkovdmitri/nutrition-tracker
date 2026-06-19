@@ -5,6 +5,12 @@
 
     "postCreateCommand": "cd backend && pip install uv && uv sync",
 
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "moby": false
+        }
+    },
+    
     "customizations": {
         "vscode": {
             "extensions": [
