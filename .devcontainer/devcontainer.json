@@ -1,15 +1,18 @@
 {
     "name": "nutrition-tracker",
 
-    "image": "mcr.microsoft.com/devcontainers/python:3.12",
-
-    "postCreateCommand": "cd backend && pip install uv && uv sync",
+    "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
 
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "moby": false
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
         }
     },
+
+    "postCreateCommand": "cd backend && pip install uv && uv sync",
     
     "customizations": {
         "vscode": {
