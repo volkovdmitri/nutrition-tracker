@@ -12,13 +12,15 @@ services:
 
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-    restart: unless-stopped
-    command: "ollama run qwen2.5:0.5b"
+    entrypoint: ["/bin/bash", "-c", "\
+      ollama serve & \
+      sleep 5 && \
+      ollama run qwen2.5:0.5b && 
+      wait"]
 
   api:
     build:

@@ -1,8 +1,8 @@
-import os
+import json
 
-import requests
+import requests  # type: ignore[import-untyped]
 
-OLLAMA_URL = "http://localhost:11434"
+OLLAMA_URL = "http://ollama:11434"
 
 
 def parse(text: str):
@@ -12,13 +12,16 @@ def parse(text: str):
             "model": "qwen2.5:0.5b",
             "prompt": f"""
                 Extract food names and calories from text.
-                You can make food names shorter and more general. For examples: pasta carbonara with cheese -> pasta.
+                You can make food names shorter and more general.
+                Try to return at least some non null food_name.
                 Return ONLY JSON: {{"food_name": string or null, "calories": number or null}}
 
                 Text: {text}
-                """,
+                """.strip(),
             "stream": False,
         },
     )
-
-    return res.json()["response"]
+    text = res.json()["response"]
+    text = text.replace("```json", "").replace("```", "").strip()
+    result = json.loads(text)
+    return result

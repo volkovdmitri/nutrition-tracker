@@ -1,12 +1,9 @@
-import json
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
 from app.db.food import FoodEntry
-from app.schemas.food import FoodCreate, FoodResponse
-
+from app.schemas.food import FoodCreate, FoodResponse, TextRequest
 from app.services.llm import parse
 
 router = APIRouter()
@@ -38,19 +35,20 @@ def create_food(
     "/text",
     response_model=FoodResponse,
 )
-def create_food(
-    text: str,
+def create_food_from_text(
+    req: TextRequest,
     db: Session = Depends(get_db),
 ):
-    result = parse(text)
+    result = parse(req.text)
     try:
-        result = json.loads(result)
         food_name = result.get("food_name")
         calories = result.get("calories")
     except Exception:
         food_name = None
         calories = None
 
+    if food_name is None:
+        return {"status": "error", "message": "Could not parse food_name"}
     if calories is None:
         return {"status": "error", "message": "Could not parse calories"}
 
