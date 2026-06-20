@@ -8,7 +8,7 @@ DATABASE_URL = os.environ.get(
     "postgresql+psycopg://postgres:postgres@postgres:5432/nutrition",
 )
 
-#DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/nutrition"
+# DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/nutrition"
 
 engine = create_engine(DATABASE_URL)
 
