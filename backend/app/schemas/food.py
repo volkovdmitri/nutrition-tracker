@@ -12,3 +12,7 @@ class FoodResponse(BaseModel):
     calories: int
 
     model_config = {"from_attributes": True}
+
+
+class TextRequest(BaseModel):
+    text: str

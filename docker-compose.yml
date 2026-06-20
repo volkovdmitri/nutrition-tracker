@@ -10,6 +10,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["/bin/bash", "-c", "\
+      ollama serve & \
+      sleep 5 && \
+      ollama run qwen2.5:0.5b && 
+      wait"]
+
   api:
     build:
       context: ./backend
@@ -32,3 +44,4 @@ services:
 
 volumes:
   postgres_data:
+  ollama_data:

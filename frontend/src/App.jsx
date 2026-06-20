@@ -4,9 +4,24 @@ import "./App.css";
 function App() {
 	const [foodName, setFoodName] = useState("");
 	const [calories, setCalories] = useState("");
+	const [text, setText] = useState("");
 
 	const [foods, setFoods] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	async function handleTextSubmit() {
+		await fetch("http://127.0.0.1:8000/text", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				text: text,
+			}),
+		});
+
+		setText("");
+	}
 
 	async function handleSubmit() {
 		await fetch("http://127.0.0.1:8000/food", {
@@ -47,7 +62,7 @@ function App() {
 
 	return (
 		<div className="container">
-			{/* LEFT */}
+			{/* LEFT UP*/}
 			<div className="left">
 				<h2>Submit food</h2>
 
@@ -65,6 +80,21 @@ function App() {
 				/>
 
 				<button type="button" onClick={handleSubmit}>
+					Submit
+				</button>
+			</div>
+
+			{/* LEFT BOTTOM*/}
+			<div className="left">
+				<h2>Submit text</h2>
+
+				<input
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+					placeholder="Text"
+				/>
+
+				<button type="button" onClick={handleTextSubmit}>
 					Submit
 				</button>
 			</div>
