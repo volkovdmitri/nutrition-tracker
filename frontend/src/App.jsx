@@ -1,6 +1,16 @@
 import { useState } from "react";
 import "./App.css";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { RechartsDevtools } from "@recharts/devtools";
+import {
+	CartesianGrid,
+	Legend,
+	Line,
+	LineChart,
+	Tooltip,
+	XAxis,
+	YAxis,
+} from "recharts";
 
 function App() {
 	const [showMascot, setShowMascot] = useState(false);
@@ -166,6 +176,34 @@ function App() {
 						</li>
 					))}
 				</ul>
+				<LineChart
+					style={{ width: "100%", aspectRatio: 1.618, maxWidth: 600 }}
+					responsive
+					data={foods}
+					margin={{
+						top: 20,
+						right: 20,
+						bottom: 5,
+						left: 0,
+					}}
+				>
+					<CartesianGrid stroke="#aaa" strokeDasharray="5 5" />
+					<Line
+						type="monotone"
+						dataKey="calories"
+						stroke="purple"
+						strokeWidth={2}
+						name="Calories"
+					/>
+					<XAxis dataKey="food_name" />
+					<YAxis
+						width="auto"
+						label={{ value: "Calories", position: "insideLeft", angle: -90 }}
+					/>
+					<Legend align="right" />
+					<Tooltip />
+					<RechartsDevtools />
+				</LineChart>
 			</div>
 		</div>
 	);
