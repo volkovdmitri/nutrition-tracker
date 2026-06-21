@@ -1,13 +1,55 @@
 import { useState } from "react";
 import "./App.css";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 function App() {
+	const [showMascot, setShowMascot] = useState(false);
+	const [message, setMessage] = useState("Привет!");
+
 	const [foodName, setFoodName] = useState("");
 	const [calories, setCalories] = useState("");
 	const [text, setText] = useState("");
 
 	const [foods, setFoods] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	const messages = [
+		"Ты отлично справляешься",
+		"Хорошая работа",
+		"Так держать",
+		"Ты двигаешься правильно",
+		"Отличный прогресс",
+		"Я тобой доволен",
+		"Становится лучше с каждым шагом",
+		"Аккуратно и стабильно",
+		"Ты на верном пути",
+		"Продолжай в том же духе",
+	];
+	const getRandomMessage = () => {
+		return messages[Math.floor(Math.random() * messages.length)];
+	};
+
+	const Mascot = () => {
+		return (
+			showMascot && (
+				<div className="mascot-wrapper">
+					<div className="speech-bubble">{message}</div>
+					<div className="mascot">
+						<DotLottieReact
+							src="/src/assets/mascot.lottie"
+							autoplay
+							loop
+							style={{
+								width: "100%",
+								height: "100%",
+								display: "block",
+							}}
+						/>
+					</div>
+				</div>
+			)
+		);
+	};
 
 	async function handleTextSubmit() {
 		await fetch("http://127.0.0.1:8000/text", {
@@ -21,6 +63,8 @@ function App() {
 		});
 
 		setText("");
+		setMessage(getRandomMessage());
+		setShowMascot(true);
 	}
 
 	async function handleSubmit() {
@@ -37,6 +81,8 @@ function App() {
 
 		setFoodName("");
 		setCalories("");
+		setMessage(getRandomMessage());
+		setShowMascot(true);
 	}
 
 	async function fetchFoods() {
@@ -58,10 +104,15 @@ function App() {
 		} finally {
 			setLoading(false);
 		}
+		setMessage(getRandomMessage());
+		setShowMascot(true);
 	}
 
 	return (
 		<div className="container">
+			<div className="mascot">
+				<Mascot />
+			</div>
 			{/* LEFT UP*/}
 			<div className="left">
 				<h2>Submit food</h2>
