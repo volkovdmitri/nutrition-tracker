@@ -9,6 +9,7 @@ dependencies = [
     "datetime>=6.0",
     "fastapi>=0.137.2",
     "httpx>=0.28.1",
+    "passlib>=1.7.4",
     "psycopg[binary]>=3.3.4",
     "requests>=2.34.2",
     "sqlalchemy>=2.0.51",
@@ -23,6 +24,7 @@ dev = [
     "pytest>=9.1.0",
     "pytest-cov>=7.1.0",
     "ruff>=0.15.17",
+    "types-passlib>=1.7.7.20260211",
     "types-requests>=2.33.0.20260518",
 ]
 
