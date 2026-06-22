@@ -1,8 +1,8 @@
-"""add users and relations
+"""create tables
 
-Revision ID: bdd3943f43d8
-Revises: 90c7c4b286b9
-Create Date: 2026-06-22 11:45:25.712567
+Revision ID: 3dde234d16e2
+Revises:
+Create Date: 2026-06-22 13:11:16.965129
 
 """
 
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 from alembic import op  # type: ignore
 
 # revision identifiers, used by Alembic.
-revision: str = "bdd3943f43d8"
-down_revision: str | Sequence[str] | None = "90c7c4b286b9"
+revision: str = "3dde234d16e2"
+down_revision: str | Sequence[str] | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
