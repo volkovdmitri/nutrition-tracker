@@ -6,7 +6,7 @@ from app.db.food import FoodEntry
 from app.schemas.food import FoodCreate, FoodResponse, TextRequest
 from app.services.llm import parse
 
-router = APIRouter()
+router = APIRouter(tags=["Food"])
 
 
 @router.post(
