@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.auth.jwt import create_access_token
 from app.auth.security import hash_password, verify_password
 from app.db.dependencies import get_db
 from app.db.user import User
@@ -35,4 +36,6 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     if not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    return {"message": "ok"}
+    token = create_access_token({"sub": db_user.id})
+
+    return {"access_token": token, "token_type": "bearer"}
