@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context  # type: ignore
 from app.db.base import Base  # type: ignore
 from app.db.food import FoodEntry  # noqa
+from app.db.user import User  # noqa
 
 config = context.config
 
