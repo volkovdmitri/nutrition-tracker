@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from app.api.auth import get_current_user
 from app.db.dependencies import get_db
 from app.db.food import FoodEntry
+from app.db.user import User
 from app.schemas.food import FoodCreate, FoodResponse, TextRequest
 from app.services.llm import parse
 
@@ -70,7 +72,5 @@ def create_food_from_text(
     "/food",
     response_model=list[FoodResponse],
 )
-def get_food(
-    db: Session = Depends(get_db),
-):
-    return db.query(FoodEntry).all()
+def get_food(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return db.query(FoodEntry).filter(FoodEntry.user_id == current_user.id).all()

@@ -9,6 +9,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  
+  pgweb:
+    image: sosedoff/pgweb
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/nutrition?sslmode=disable
 
   ollama:
     image: ollama/ollama:latest
